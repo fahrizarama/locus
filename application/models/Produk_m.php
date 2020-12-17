@@ -7,7 +7,7 @@ class Produk_m extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_produk');
-        $this->db->order_by('id_produk DESC');
+        $this->db->order_by('RAND()');
         return $this->db->get();
     }
     public function detail_data($id = null)
