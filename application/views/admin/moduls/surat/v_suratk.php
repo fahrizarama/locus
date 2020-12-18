@@ -12,7 +12,7 @@
         <div id="tambahsurat" class="modal fade" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form class="form-horizontal" role="form" action="<?= base_url('C_surat/save_suratm') ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="<?= base_url('C_surat/save_suratk') ?>" method="POST" enctype="multipart/form-data">
                         <input type="reset" class="hidden">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -107,7 +107,7 @@
     </div>
 </div>
 <?php foreach($esk as $e) : ?>
-<div id="modalupdate<?= $e->id_surat_masuk ?>" class="modal fade" tabindex="-1">
+<div id="modalupdate<?= $e->id_surat ?>" class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <form class="form-horizontal" role="form" action="<?= base_url('C_surat/update_suratm') ?>" method="POST" enctype="multipart/form-data">
@@ -126,7 +126,7 @@
 
                         <div class="col-md-12">
                             <label>Nomor Surat</label>
-                            <input type="hidden" name="id_surat_masuk" value="<?= $e->id_surat_masuk ?>">
+                            <input type="hidden" name="id_surat" value="<?= $e->id_surat ?>">
                             <input type="text" class="form-control" value="<?= $e->no_surat ?>" name="no_surat" placeholder="Nomor Surat" required>
                         </div>
 
