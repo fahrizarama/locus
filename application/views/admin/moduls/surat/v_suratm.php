@@ -32,6 +32,11 @@
                                 </div>
 
                                 <div class="col-md-12">
+                                    <label>Pengirim Surat</label>
+                                    <input type="text" class="form-control" name="pengirim_surat" placeholder="Pengirim Surat" required>
+                                </div>
+
+                                <div class="col-md-12">
                                     <label>Tanggal Surat</label>
                                     <input type="date" class="form-control" name="tanggal_surat" placeholder="Tanggal Surat" required>
                                 </div>
@@ -74,6 +79,7 @@
                 <tr>
                     <th>No</th>
                     <th>No Surat</th>
+                    <th>Pengirim Surat</th>
                     <th>Tanggal Surat</th>
                     <th>Perihal Surat</th>
                     <th>Tembusan Surat</th>
@@ -84,11 +90,13 @@
             </thead>
             <tbody>
                 <?php $no = 1;
-                foreach ($sm as $sm) : ?>
+                foreach ($sm as $sm) : 
+                $tanggal = $sm->tanggal_surat; ?>
                     <tr>
                         <th><?= $no++ ?></th>
                         <th><?= $sm->no_surat ?></th>
-                        <th><?= $sm->tanggal_surat ?></th>
+                        <th><?= $sm->pengirim_surat ?></th>
+                        <th><?= date("d-m-yy", strtotime($tanggal)) ?></th>
                         <th><?= $sm->perihal_surat ?></th>
                         <th><?= $sm->tembusan_surat ?></th>
                         <th><?= $sm->penulis_surat ?></th>
@@ -98,7 +106,7 @@
                             |
                             <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_surat/delete_suratm/' . $sm->id_surat_masuk) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
                             |
-                            <a href="" class="btn btn-xs btn-success"><i class="fas fa-eye"></i></a>
+                            <a href="" data-toggle="modal" data-target="#tampilsurat<?= $sm->id_surat_masuk ?>" class="btn btn-xs btn-success"><i class="fa fa-download"></i></a>
                         </th>
                     </tr>
                 <?php endforeach; ?>
@@ -106,69 +114,93 @@
         </table>
     </div>
 </div>
-<?php foreach($esm as $e) : ?>
-<div id="modalupdate<?= $e->id_surat_masuk ?>" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form class="form-horizontal" role="form" action="<?= base_url('C_surat/update_suratm') ?>" method="POST" enctype="multipart/form-data">
+<?php foreach ($esm as $e) : ?>
+    <div id="modalupdate<?= $e->id_surat_masuk ?>" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-horizontal" role="form" action="<?= base_url('C_surat/update_suratm') ?>" method="POST" enctype="multipart/form-data">
+                    <input type="reset" class="hidden">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="smaller lighter blue no-margin">Edit Surat</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="alert alert-warning text-center">
+                                <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                <strong>Peringatan!</strong><br>
+                                Format file surat pdf<br>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Nomor Surat</label>
+                                <input type="hidden" name="id_surat_masuk" value="<?= $e->id_surat_masuk ?>">
+                                <input type="text" class="form-control" value="<?= $e->no_surat ?>" name="no_surat" placeholder="Nomor Surat" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Pengirim Surat</label>
+                                <input type="text" class="form-control" name="pengirim_surat" value="<?= $e->pengirim_surat ?>" placeholder="Pengirim Surat" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Tanggal Surat</label>
+                                <input type="date" class="form-control" value="<?= $e->tanggal_surat ?>" name="tanggal_surat" placeholder="Tanggal Surat" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Perihal Surat</label>
+                                <textarea class="form-control" name="perihal_surat" id="input_deskripsi" placeholder="Deskripsi Event"><?= $e->perihal_surat ?></textarea>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Tembusan Surat</label>
+                                <input type="text" class="form-control" name="tembusan_surat" value="<?= $e->tembusan_surat ?>" placeholder="Tembusan Surat" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Penulis Surat</label>
+                                <input type="text" class="form-control" name="penulis_surat" value="<?= $e->penulis_surat ?>" placeholder="Penulis Surat" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>File Surat</label>
+                                <div class="custom-file">
+                                    <input type="file" name="file_surat" id="id-input-file-2" class="custom-file-input">
+                                    <input type="hidden" name="old_file" value="<?= $e->file_surat ?>" />
+                                    <!-- <label class="custom-file-label">Pilih Gambar...</label> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Update</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<?php foreach ($tm as $tm) : ?>
+    <div id="tampilsurat<?= $tm->id_surat_masuk ?>" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <input type="reset" class="hidden">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="smaller lighter blue no-margin">Edit Surat</h3>
+                    <h3 class="smaller lighter blue no-margin">Surat</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="alert alert-warning text-center">
-                            <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                            <strong>Peringatan!</strong><br>
-                            Format file surat pdf<br>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Nomor Surat</label>
-                            <input type="hidden" name="id_surat_masuk" value="<?= $e->id_surat_masuk ?>">
-                            <input type="text" class="form-control" value="<?= $e->no_surat ?>" name="no_surat" placeholder="Nomor Surat" required>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Tanggal Surat</label>
-                            <input type="date" class="form-control" value="<?= $e->tanggal_surat ?>" name="tanggal_surat" placeholder="Tanggal Surat" required>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Perihal Surat</label>
-                            <textarea class="form-control" name="perihal_surat" id="input_deskripsi" placeholder="Deskripsi Event"><?= $e->perihal_surat ?></textarea>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Tembusan Surat</label>
-                            <input type="text" class="form-control" name="tembusan_surat" value="<?= $e->tembusan_surat ?>" placeholder="Tembusan Surat" required>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Penulis Surat</label>
-                            <input type="text" class="form-control" name="penulis_surat" value="<?= $e->penulis_surat ?>" placeholder="Penulis Surat" required>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>File Surat</label>
-                            <div class="custom-file">
-                                <input type="file" name="file_surat" id="id-input-file-2" class="custom-file-input">
-                                <input type="hidden" name="old_file" value="<?= $e->file_surat ?>" />
-                                <!-- <label class="custom-file-label">Pilih Gambar...</label> -->
-                            </div>
-                        </div>
-
-                    </div>
+                    <embed src="<?php echo base_url('assets/file_surat/surat_masuk/' . $tm->file_surat) ?>" type="application/pdf" width="100%" height="500px" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Update</i></button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
 <?php endforeach; ?>
 <div id="modalresult" class="modal fade" tabindex="-1"></div>
 <script>

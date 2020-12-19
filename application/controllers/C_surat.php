@@ -12,6 +12,7 @@ class C_surat extends CI_Controller
     {
         $data['sm'] = $this->M_surat->surat_masuk();
         $data['esm'] = $this->M_surat->surat_masuk();
+        $data['tm'] = $this->M_surat->surat_masuk();
         $data['view_file'] = "admin/moduls/surat/v_suratm";
         $this->load->view('admin/admin_view', $data);
     }
@@ -50,6 +51,7 @@ class C_surat extends CI_Controller
     {
         $data['sk'] = $this->M_surat->surat_keluar();
         $data['esk'] = $this->M_surat->surat_keluar();
+        $data['ts'] = $this->M_surat->surat_keluar();
         $data['view_file'] = "admin/moduls/surat/v_suratk";
         $this->load->view('admin/admin_view', $data);
     }

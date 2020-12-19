@@ -16,6 +16,7 @@ class M_surat extends CI_Model
     {
         $post = $this->input->post();
         $this->no_surat = $post['no_surat'];
+        $this->pengirim_surat = $post['pengirim_surat'];
         $this->tanggal_surat = $post['tanggal_surat'];
         $this->perihal_surat = $post['perihal_surat'];
         $this->tembusan_surat = $post['tembusan_surat'];
@@ -47,6 +48,7 @@ class M_surat extends CI_Model
         $post = $this->input->post();
         $this->id_surat_masuk = $post['id_surat_masuk'];
         $this->no_surat = $post['no_surat'];
+        $this->pengirim_surat = $post['pengirim_surat'];
         $this->tanggal_surat = $post['tanggal_surat'];
         $this->perihal_surat = $post['perihal_surat'];
         $this->tembusan_surat = $post['tembusan_surat'];
