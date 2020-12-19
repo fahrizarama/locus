@@ -126,4 +126,3 @@ class M_surat extends CI_Model
         return $this->db->delete($this->tabel2, array("id_surat" => $id_surat));
     }
 }
-
