@@ -1,5 +1,7 @@
 <?php $title = "<i class='fa fa-building'></i>&nbsp;Fakultas, Jurusan, Prodi"; ?>
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" media="screen">
 <div class="page-header">
     <h1><?php echo $title; ?></h1>
 </div>
@@ -22,20 +24,23 @@
                         <div class="modal-body">
                             <div class="row">
 
-                                <div class="col-md-12">
-                                    <label>Nama Kampus</label>
-                                    <input type="text" class="form-control" name="nama_kampus" placeholder="Nama Kampus" required>
+                                <div class="alert alert-warning text-center">
+                                    <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                    <strong>Peringatan!</strong><br>
+                                    Kode Fakultas Harap di isi<br>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Alamat</label>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" required>
+                                    <label>Kode Fakultas</label>
+                                    <input type="text" class="form-control" name="id_fakultas" placeholder="Kode Fakultas" required>
                                 </div>
 
+
                                 <div class="col-md-12">
-                                    <label>Telepon</label>
-                                    <input type="text" class="form-control" name="telp" placeholder="Telepon" required>
+                                    <label>Fakultas</label>
+                                    <input type="text" class="form-control" name="nama_fakultas" placeholder="Nama Fakultas" required>
                                 </div>
+
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -48,34 +53,292 @@
         </div>
     </div>
 </div>
-<table class="table table-striped table-bordered table-hover" id="fakultas">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>ID Fakultas</th>
-            <th>Nama Fakultas</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $no = 1;
-        foreach ($fakultas as $f) : ?>
+<div class="row">
+    <table class="table table-striped table-bordered table-hover" id="TABLE_1">
+        <thead>
             <tr>
-                <th><?= $no++ ?></th>
-                <th><?= $f->id_fakultas ?></th>
-                <th><?= $f->nama_fakultas ?></th>
-                <th>
-                    <a href="" data-toggle="modal" data-target="#modalupdate<?= $f->id_fakultas ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                    |
-                    <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php base_url('C_magang/delete_fakultas/' . $f->id_fakultas) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
-                </th>
+                <th>No</th>
+                <th>ID Fakultas</th>
+                <th>Nama Fakultas</th>
+                <th>Action</th>
             </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <?php $no = 1;
+            foreach ($fakultas as $f) : ?>
+                <tr>
+                    <th><?= $no++ ?></th>
+                    <th><?= $f->id_fakultas ?></th>
+                    <th><?= $f->nama_fakultas ?></th>
+                    <th>
+                        <a href="" data-toggle="modal" data-target="#updatefakultas<?= $f->id_fakultas ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                        |
+                        <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_magang/delete_fakultas/' . $f->id_fakultas) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                    </th>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
-</div>
+<?php foreach ($ef as $ef) : ?>
+    <div id="updatefakultas<?= $ef->id_fakultas ?>" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_fakultas') ?>" method="POST" enctype="multipart/form-data">
+                    <input type="reset" class="hidden">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="smaller lighter blue no-margin">Edit Fakultas</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
 
+                            <div class="col-md-12">
+                                <label>Kode Fakultas</label>
+                                <input type="text" class="form-control" name="id_fakultas" value="<?= $ef->id_fakultas ?>" placeholder="Kode Fakultas" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Fakultas</label>
+                                <input type="text" class="form-control" name="nama_fakultas" value="<?= $ef->nama_fakultas ?>" placeholder="Nama Fakultas" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div style="padding-bottom: 10px; margin-top: 30px;">
+            <a href="#tambahjurusan" role="button" class="btn btn-primary" data-toggle="modal">Tambah Jurusan</a>
+        </div>
+        <div id="tambahjurusan" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form class="form-horizontal" role="form" action="<?= base_url('C_magang/save_jurusan') ?>" method="POST" enctype="multipart/form-data">
+                        <input type="reset" class="hidden">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 class="smaller lighter blue no-margin">Tambah Jurusan</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="alert alert-warning text-center">
+                                    <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                    <strong>Peringatan!</strong><br>
+                                    Kode Jurusan Harap di isi<br>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Kode Jurusan</label>
+                                    <input type="text" class="form-control" name="id_jurusan" placeholder="Kode Jurusan" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Jurusan</label>
+                                    <input type="text" class="form-control" name="nama_jurusan" placeholder="Nama Jurusan" required>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-striped table-bordered table-hover" id="TABLE_2">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>ID Jurusan</th>
+                <th>Nama Jurusan</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $no = 1;
+            foreach ($jurusan as $j) : ?>
+                <tr>
+                    <th><?= $no++ ?></th>
+                    <th><?= $j->id_jurusan ?></th>
+                    <th><?= $j->nama_jurusan ?></th>
+                    <th>
+                        <a href="" data-toggle="modal" data-target="#updatejurusan<?= $j->id_jurusan ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                        |
+                        <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_magang/delete_jurusan/' . $j->id_jurusan) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                    </th>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?php foreach ($ej as $ej) : ?>
+    <div id="updatejurusan<?= $ej->id_jurusan ?>" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_jurusan') ?>" method="POST" enctype="multipart/form-data">
+                    <input type="reset" class="hidden">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="smaller lighter blue no-margin">Edit Jurusan</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="alert alert-warning text-center">
+                                <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                <strong>Peringatan!</strong><br>
+                                Kode Jurusan Harap di isi<br>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Kode Jurusan</label>
+                                <input type="text" class="form-control" name="id_jurusan" value="<?= $ej->id_jurusan ?>" placeholder="Kode Jurusan" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Jurusan</label>
+                                <input type="text" class="form-control" name="nama_jurusan" value="<?= $ej->nama_jurusan ?>" placeholder="Nama Jurusan" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<div class="row">
+    <div class="col-md-12">
+        <div style="padding-bottom: 10px; margin-top: 30px;">
+            <a href="#tambahprodi" role="button" class="btn btn-primary" data-toggle="modal">Tambah Prodi</a>
+        </div>
+        <div id="tambahprodi" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form class="form-horizontal" role="form" action="<?= base_url('C_magang/save_prodi') ?>" method="POST" enctype="multipart/form-data">
+                        <input type="reset" class="hidden">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h3 class="smaller lighter blue no-margin">Tambah Prodi</h3>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+
+                                <div class="alert alert-warning text-center">
+                                    <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                    <strong>Peringatan!</strong><br>
+                                    Kode Prodi Harap di isi<br>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Kode Prodi</label>
+                                    <input type="text" class="form-control" name="id_prodi" placeholder="Kode Prodi" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Prodi</label>
+                                    <input type="text" class="form-control" name="nama_prodi" placeholder="Nama Prodi" required>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-striped table-bordered table-hover" id="TABLE_3">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>ID Prodi</th>
+                <th>Nama Prodi</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $no = 1;
+            foreach ($prodi as $p) : ?>
+                <tr>
+                    <th><?= $no++ ?></th>
+                    <th><?= $p->id_prodi ?></th>
+                    <th><?= $p->nama_prodi ?></th>
+                    <th>
+                        <a href="" data-toggle="modal" data-target="#updateprodi<?= $p->id_prodi ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                        |
+                        <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_magang/delete_prodi/' . $p->id_prodi) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                    </th>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+<?php foreach($ep as $ep) : ?>
+<div id="updateprodi<?= $ep->id_prodi ?>" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_prodi') ?>" method="POST" enctype="multipart/form-data">
+                <input type="reset" class="hidden">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3 class="smaller lighter blue no-margin">Tambah Prodi</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="alert alert-warning text-center">
+                            <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                            <strong>Peringatan!</strong><br>
+                            Kode Prodi Harap di isi<br>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Kode Prodi</label>
+                            <input type="text" class="form-control" name="id_prodi" value="<?= $ep->id_prodi ?>" placeholder="Kode Prodi" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Prodi</label>
+                            <input type="text" class="form-control" name="nama_prodi" value="<?= $ep->nama_prodi ?>" placeholder="Nama Prodi" required>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
 <script>
     $(document).ready(function() {
         tinyMCE.init({
@@ -209,11 +472,34 @@
     $(document).ready(function() {
         $('#fakultas').DataTable();
     });
+
+    // $(document).ready(function() {
+    //     $("table[id^='TABLE']").DataTable({
+    //         "scrollY": "200px",
+    //         "scrollCollapse": true,
+    //         "searching": false,
+    //         "paging": false
+    //     });
+    // });
 </script>
 <script>
     $('.custom-file-input').on('change', function() {
         let fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+
+    $(document).ready(function() {
+        $('#jurusan').DataTable();
+    });
+</script>
+<script type="text/javascript" defer="defer">
+    $(document).ready(function() {
+        $("table[id^='TABLE']").DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+            "searching": true,
+            "paging": true,
+        });
     });
 </script>
 <script src="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"></script>
