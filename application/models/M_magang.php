@@ -13,6 +13,7 @@ class M_magang extends CI_Model
     private $tb_keahlian_magang = "tb_keahlian_magang";
     private $tb_mahasiswa = "tb_mahasiswa";
     private $tb_keahlian_mahasiswa = "tb_keahlian_mahasiswa";
+    private $tb_tugas_magang = "tb_tugas_magang";
 
 
     public function kampus()
@@ -239,7 +240,95 @@ class M_magang extends CI_Model
 
     public function keahlian_mahasiswa()
     {
-        return $this->db->get($this->tb_keahlian_mahasiswa)->result();
+        $this->db->select('*');
+        $this->db->from('tb_keahlian_mahasiswa');
+        $this->db->join('tb_mahasiswa', 'tb_mahasiswa.id_mahasiswa=tb_keahlian_mahasiswa.id_mahasiswa', 'left outer');
+        $this->db->join('tb_keahlian_magang', 'tb_keahlian_magang.id_keahlian=tb_keahlian_mahasiswa.id_keahlian', 'left outer');
+        return $this->db->get()->result();
+    }
+
+    public function get_by_id($id)
+    {
+		$this->db->where('id_mahasiswa', $id);
+		return $this->db->get('tb_mahasiswa')->row();
+    }
+    
+    public function save_keahlian_mhs()
+    {
+        $post = $this->input->post();
+        $this->id_keahlian_mhs = $post['id_keahlian_mhs'];
+        $this->id_mahasiswa = $post['id_mahasiswa'];
+        $this->id_keahlian = $post['id_keahlian'];
+
+        $this->db->insert($this->tb_keahlian_mahasiswa, $this);
+    }
+
+    public function update_keahlian_mhs()
+    {
+        $post = $this->input->post();
+        $this->id_keahlian_mhs = $post['id_keahlian_mhs'];
+        $this->id_mahasiswa = $post['id_mahasiswa'];
+        $this->id_keahlian = $post['id_keahlian'];
+
+        $this->db->update($this->tb_keahlian_mahasiswa, $this, array('id_keahlian_mhs' => $post['id_keahlian_mhs']));
+    }
+
+    public function delete_keahlian_mhs($id)
+    {
+        return $this->db->delete($this->tb_keahlian_mahasiswa, array('id_keahlian_mhs' => $id));
+    }
+
+    public function tugas_magang()
+    {
+        $this->db->select('*');
+        $this->db->from('tb_tugas_magang');
+        $this->db->join('tb_mahasiswa', 'tb_mahasiswa.id_mahasiswa = tb_tugas_magang.id_mahasiswa', 'left outer');
+        $this->db->join('tb_keahlian_magang', 'tb_keahlian_magang.id_keahlian = tb_tugas_magang.id_keahlian', 'left outer');
+        return $this->db->get()->result();
+    }
+
+    public function save_tugasmagang()
+    {
+        $post = $this->input->post();
+        $this->id_mahasiswa = $post['id_mahasiswa'];
+        $this->id_keahlian = $post['id_keahlian'];
+        $this->judul_tugas = $post['judul_tugas'];
+        $this->deskripsi_tugas = $post['deskripsi_tugas'];
+        $this->tgl_mulai = $post['tgl_mulai'];
+        $this->tgl_selesai = $post['tgl_selesai'];
+        $this->nilai = $post['nilai'];
+        
+        $this->db->insert($this->tb_tugas_magang, $this);
+    }
+
+    public function get_mahasiswa()
+    {
+        return $this->db->get($this->tb_mahasiswa)->result();
+    }
+
+    public function update_tugasmagang()
+    {
+        $post = $this->input->post();
+        $this->id_tugas = $post['id_tugas'];
+        $this->id_mahasiswa = $post['id_mahasiswa'];
+        $this->id_keahlian = $post['id_keahlian'];
+        $this->judul_tugas = $post['judul_tugas'];
+        $this->deskripsi_tugas = $post['deskripsi_tugas'];
+        $this->tgl_mulai = $post['tgl_mulai'];
+        $this->tgl_selesai = $post['tgl_selesai'];
+        $this->nilai = $post['nilai'];
+        
+        $this->db->update($this->tb_tugas_magang, $this, array('id_tugas' => $post['id_tugas']));
+    }
+
+    public function delete_tugasmagang($id)
+    {
+        return $this->db->delete($this->tb_tugas_magang, array('id_tugas' => $id));
+    }
+
+    public function tugas_selesai($status, $id)
+    {
+        $this->db->query("UPDATE `tb_mahasiswa` SET `status`= '$status' WHERE tb_mahasiswa.id_mahasiswa='$id'");
     }
 
 }

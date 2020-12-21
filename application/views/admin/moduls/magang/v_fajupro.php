@@ -32,7 +32,7 @@
 
                                 <div class="col-md-12">
                                     <label>Kode Fakultas</label>
-                                    <input type="text" class="form-control" name="id_fakultas" placeholder="Kode Fakultas" required>
+                                    <input type="text" class="form-control" name="id_fakultas" value="F"  placeholder="Kode Fakultas" required>
                                 </div>
 
 
@@ -140,7 +140,7 @@
 
                                 <div class="col-md-12">
                                     <label>Kode Jurusan</label>
-                                    <input type="text" class="form-control" name="id_jurusan" placeholder="Kode Jurusan" required>
+                                    <input type="text" class="form-control" name="id_jurusan" value="J" placeholder="Kode Jurusan" required>
                                 </div>
 
                                 <div class="col-md-12">
@@ -252,7 +252,7 @@
 
                                 <div class="col-md-12">
                                     <label>Kode Prodi</label>
-                                    <input type="text" class="form-control" name="id_prodi" placeholder="Kode Prodi" required>
+                                    <input type="text" class="form-control" value="P" name="id_prodi" placeholder="Kode Prodi" required>
                                 </div>
 
                                 <div class="col-md-12">

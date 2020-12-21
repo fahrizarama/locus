@@ -65,7 +65,7 @@
                                 <div class="col-md-12">
                                     <label>Kampus</label>
                                     <select name="id_kampus" class="form-control" required>
-                                        <option>--Pilih Kampus--</option>
+                                        <option value="">--Pilih Kampus--</option>
                                         <?php foreach ($kampus as $k) : ?>
                                             <option value="<?= $k->id_kampus ?>"><?= $k->nama_kampus ?></option>
                                         <?php endforeach; ?>

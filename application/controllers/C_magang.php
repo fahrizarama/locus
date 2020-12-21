@@ -1,5 +1,7 @@
 <?php
 
+use Matrix\Functions;
+
 class C_magang extends CI_Controller
 {
     public function __construct()
@@ -136,8 +138,14 @@ class C_magang extends CI_Controller
     public function keahlian()
     {
         $data['keahlianmahasiswa'] = $this->M_magang->keahlian_mahasiswa();
+        $data['khmhs'] = $this->M_magang->keahlian_mahasiswa();
         $data['keahlianmagang'] = $this->M_magang->keahlian_magang();
+        $data['vk'] = $this->M_magang->keahlian_magang();
         $data['ek'] = $this->M_magang->keahlian_magang();
+        $data['mhs'] = $this->M_magang->mahasiswa();
+        $data['mhs2'] = $this->M_magang->mahasiswa();
+        $data['mhs3'] = $this->M_magang->mahasiswa();
+        $data['vk2'] = $this->M_magang->keahlian_magang();
         $data['view_file'] = "admin/moduls/magang/v_keahlian";
         $this->load->view('admin/admin_view', $data);
     }
@@ -165,6 +173,38 @@ class C_magang extends CI_Controller
     public function delete_keahlian_magang($id_keahlian)
     {
         $this->M_magang->delete_keahlian_magang($id_keahlian);
+        redirect(site_url('C_magang/keahlian'));
+    }
+
+    public function nama_mahasiswa($id)
+    {
+        $data = $this->M_magang->get_by_id($id);
+        echo json_encode($data);
+    }
+
+    public function save_keahlian_mhs()
+    {
+        $s_keahlianmhs = $this->M_magang;
+        $s_keahlianmhs->save_keahlian_mhs();
+        echo "<script>
+                alert('Data keahlian mahasiswa berhasil disimpan');
+                window.location.href = '" . base_url('C_magang/keahlian') . "';
+            </script>";
+    }
+
+    public function update_keahlian_mhs()
+    {
+        $u_keahlianmhs = $this->M_magang;
+        $u_keahlianmhs->update_keahlian_mhs();
+        echo "<script>
+                alert('Data keahlian mahasiswa berhasil diupdate');
+                window.location.href = '" . base_url('C_magang/keahlian') . "';
+            </script>";
+    }
+
+    public function delete_keahlian_mhs($id)
+    {
+        $this->M_magang->delete_keahlian_mhs($id);
         redirect(site_url('C_magang/keahlian'));
     }
 
@@ -220,4 +260,43 @@ class C_magang extends CI_Controller
         window.location.href = '" . base_url('C_magang/mahasiswa') . "';
     </script>";
     }
+
+    public function tugas_magang()
+    {
+        $data['mahasiswa'] = $this->M_magang->get_mahasiswa();
+        $data['etm'] = $this->M_magang->tugas_magang();
+        $data['vmhs'] = $this->M_magang->get_mahasiswa();
+        $data['vkhl'] = $this->M_magang->keahlian_magang();
+        $data['keahlian'] = $this->M_magang->keahlian_magang();
+        $data['tugasmagang'] = $this->M_magang->tugas_magang();
+        $data['view_file'] = "admin/moduls/magang/v_tugas_magang";
+        $this->load->view('admin/admin_view', $data);
+    }
+
+    public function save_tugasmagang()
+    {
+        $s_tgsmagang = $this->M_magang;
+        $s_tgsmagang->save_tugasmagang();
+        echo "<script>
+        alert('Tugas Magang berhasil disimpan');
+        window.location.href = '" . base_url('C_magang/tugas_magang') . "';
+    </script>";
+    }
+
+    public function update_tugasmagang()
+    {
+        $u_tgsmagang = $this->M_magang;
+        $u_tgsmagang->update_tugasmagang();
+        echo "<script>
+        alert('Tugas Magang berhasil diupdate');
+        window.location.href = '" . base_url('C_magang/tugas_magang') . "';
+    </script>";
+    }
+
+    public function delete_tugasmagang($id)
+    {
+        $this->M_magang->delete_tugasmagang($id);
+        redirect(site_url('C_magang/tugas_magang'));
+    }
+
 }
