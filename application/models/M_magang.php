@@ -63,7 +63,6 @@ class M_magang extends CI_Model
     public function save_fakultas()
     {
         $post = $this->input->post();
-        $this->id_fakultas = $post['id_fakultas'];
         $this->nama_fakultas = $post['nama_fakultas'];
 
         $this->db->insert($this->tb_fakultas, $this);
@@ -92,7 +91,6 @@ class M_magang extends CI_Model
     public function save_jurusan()
     {
         $post = $this->input->post();
-        $this->id_jurusan = $post['id_jurusan'];
         $this->nama_jurusan = $post['nama_jurusan'];
 
         $this->db->insert($this->tb_jurusan, $this);
@@ -120,7 +118,6 @@ class M_magang extends CI_Model
     public function save_prodi()
     {
         $post = $this->input->post();
-        $this->id_prodi = $post['id_prodi'];
         $this->nama_prodi = $post['nama_prodi'];
 
         $this->db->insert($this->tb_prodi, $this);
@@ -149,7 +146,6 @@ class M_magang extends CI_Model
     public function save_keahlian_magang()
     {
         $post = $this->input->post();
-        $this->id_keahlian = $post['id_keahlian'];
         $this->nama_keahlian = $post['nama_keahlian'];
 
         $this->db->insert($this->tb_keahlian_magang, $this);
@@ -255,7 +251,6 @@ class M_magang extends CI_Model
     public function save_keahlian_mhs()
     {
         $post = $this->input->post();
-        $this->id_keahlian_mhs = $post['id_keahlian_mhs'];
         $this->id_mahasiswa = $post['id_mahasiswa'];
         $this->id_keahlian = $post['id_keahlian'];
 

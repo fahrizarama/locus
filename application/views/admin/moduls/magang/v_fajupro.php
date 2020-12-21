@@ -24,17 +24,10 @@
                         <div class="modal-body">
                             <div class="row">
 
-                                <div class="alert alert-warning text-center">
+                                <div class="alert alert-success text-center">
                                     <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                                    <strong>Peringatan!</strong><br>
-                                    Kode Fakultas Harap di isi<br>
+                                    <strong>Isi Fakultas</strong><br>
                                 </div>
-
-                                <div class="col-md-12">
-                                    <label>Kode Fakultas</label>
-                                    <input type="text" class="form-control" name="id_fakultas" value="F"  placeholder="Kode Fakultas" required>
-                                </div>
-
 
                                 <div class="col-md-12">
                                     <label>Fakultas</label>
@@ -92,11 +85,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-
-                            <div class="col-md-12">
-                                <label>Kode Fakultas</label>
-                                <input type="text" class="form-control" name="id_fakultas" value="<?= $ef->id_fakultas ?>" placeholder="Kode Fakultas" required>
-                            </div>
+                                <input type="hidden" class="form-control" name="id_fakultas" value="<?= $ef->id_fakultas ?>" placeholder="Kode Fakultas" required>
 
                             <div class="col-md-12">
                                 <label>Fakultas</label>
@@ -132,15 +121,9 @@
                         <div class="modal-body">
                             <div class="row">
 
-                                <div class="alert alert-warning text-center">
+                                <div class="alert alert-success text-center">
                                     <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                                    <strong>Peringatan!</strong><br>
-                                    Kode Jurusan Harap di isi<br>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label>Kode Jurusan</label>
-                                    <input type="text" class="form-control" name="id_jurusan" value="J" placeholder="Kode Jurusan" required>
+                                    <strong>Isi Jurusan!</strong><br>
                                 </div>
 
                                 <div class="col-md-12">
@@ -200,16 +183,12 @@
                     <div class="modal-body">
                         <div class="row">
 
-                            <div class="alert alert-warning text-center">
+                            <div class="alert alert-success text-center">
                                 <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                                <strong>Peringatan!</strong><br>
-                                Kode Jurusan Harap di isi<br>
+                                <strong>Isi Jurusan!</strong><br>
                             </div>
 
-                            <div class="col-md-12">
-                                <label>Kode Jurusan</label>
-                                <input type="text" class="form-control" name="id_jurusan" value="<?= $ej->id_jurusan ?>" placeholder="Kode Jurusan" required>
-                            </div>
+                                <input type="hidden" class="form-control" name="id_jurusan" value="<?= $ej->id_jurusan ?>" placeholder="Kode Jurusan" required>
 
                             <div class="col-md-12">
                                 <label>Jurusan</label>
@@ -244,15 +223,9 @@
                         <div class="modal-body">
                             <div class="row">
 
-                                <div class="alert alert-warning text-center">
+                                <div class="alert alert-success text-center">
                                     <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                                    <strong>Peringatan!</strong><br>
-                                    Kode Prodi Harap di isi<br>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label>Kode Prodi</label>
-                                    <input type="text" class="form-control" value="P" name="id_prodi" placeholder="Kode Prodi" required>
+                                    <strong>Isi Prodi!</strong><br>
                                 </div>
 
                                 <div class="col-md-12">
@@ -299,45 +272,44 @@
         </tbody>
     </table>
 </div>
-<?php foreach($ep as $ep) : ?>
-<div id="updateprodi<?= $ep->id_prodi ?>" class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_prodi') ?>" method="POST" enctype="multipart/form-data">
-                <input type="reset" class="hidden">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h3 class="smaller lighter blue no-margin">Tambah Prodi</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-
-                        <div class="alert alert-warning text-center">
-                            <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                            <strong>Peringatan!</strong><br>
-                            Kode Prodi Harap di isi<br>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Kode Prodi</label>
-                            <input type="text" class="form-control" name="id_prodi" value="<?= $ep->id_prodi ?>" placeholder="Kode Prodi" required>
-                        </div>
-
-                        <div class="col-md-12">
-                            <label>Prodi</label>
-                            <input type="text" class="form-control" name="nama_prodi" value="<?= $ep->nama_prodi ?>" placeholder="Nama Prodi" required>
-                        </div>
-
+<?php foreach ($ep as $ep) : ?>
+    <div id="updateprodi<?= $ep->id_prodi ?>" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_prodi') ?>" method="POST" enctype="multipart/form-data">
+                    <input type="reset" class="hidden">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="smaller lighter blue no-margin">Tambah Prodi</h3>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
-                </div>
-            </form>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <div class="alert alert-success text-center">
+                                <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
+                                <strong>Isi Prodi!</strong><br>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Kode Prodi</label>
+                                <input type="text" class="form-control" name="id_prodi" value="<?= $ep->id_prodi ?>" placeholder="Kode Prodi" required>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>Prodi</label>
+                                <input type="text" class="form-control" name="nama_prodi" value="<?= $ep->nama_prodi ?>" placeholder="Nama Prodi" required>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm pull-right" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right" style="margin-right: 5px;"><i class="fa fa-save"> Save</i></button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 <?php endforeach; ?>
 <script>
     $(document).ready(function() {

@@ -23,17 +23,10 @@
                         <div class="modal-body">
                             <div class="row">
 
-                                <div class="alert alert-warning text-center">
+                                <div class="alert alert-success text-center">
                                     <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                                    <strong>Peringatan!</strong><br>
-                                    Kode Keahlian Mahasiswa Harap di isi<br>
+                                    <strong>Isi Data!</strong><br>
                                 </div>
-
-                                <div class="col-md-12">
-                                    <label>Kode Keahlian Mahasiswa</label>
-                                    <input type="text" class="form-control" value="KHLM" name="id_keahlian_mhs" placeholder="Kode Keahlian" required>
-                                </div>
-
                                 <!-- <div class="col-md-12">
                                     <label>Mahasiswa</label>
                                     <input type="text" class="form-control" id="id_mahasiswa" name="id_mahasiswa" placeholder="Kode Keahlian" required>
@@ -160,11 +153,7 @@
                                 Kode Keahlian Mahasiswa Harap di isi<br>
                             </div>
 
-                            <div class="col-md-12">
-                                <label>Kode Keahlian Mahasiswa</label>
-                                <input type="text" class="form-control" value="<?= $k->id_keahlian_mhs ?>" name="id_keahlian_mhs" placeholder="Kode Keahlian" required>
-                            </div>
-
+                                <input type="hidden" class="form-control" value="<?= $k->id_keahlian_mhs ?>" name="id_keahlian_mhs" placeholder="Kode Keahlian" required>
                             <!-- <div class="col-md-12">
                                     <label>Mahasiswa</label>
                                     <input type="text" class="form-control" id="id_mahasiswa" name="id_mahasiswa" placeholder="Kode Keahlian" required>
@@ -225,15 +214,9 @@
                         <div class="modal-body">
                             <div class="row">
 
-                                <div class="alert alert-warning text-center">
+                                <div class="alert alert-success text-center">
                                     <!-- <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> -->
-                                    <strong>Peringatan!</strong><br>
-                                    Kode Keahlian Harap di isi<br>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label>Kode Keahlian</label>
-                                    <input type="text" class="form-control" value="KHN" name="id_keahlian" placeholder="Kode Keahlian" required>
+                                    <strong>Isi Keahlian!</strong><br>
                                 </div>
 
                                 <div class="col-md-12">
@@ -299,10 +282,7 @@
                                 Kode Keahlian Harap di isi<br>
                             </div>
 
-                            <div class="col-md-12">
-                                <label>Kode Keahlian</label>
-                                <input type="text" class="form-control" name="id_keahlian" value="<?= $ek->id_keahlian ?>" placeholder="Kode Keahlian" required>
-                            </div>
+                                <input type="hidden" class="form-control" name="id_keahlian" value="<?= $ek->id_keahlian ?>" placeholder="Kode Keahlian" required>
 
                             <div class="col-md-12">
                                 <label>Keahlian</label>

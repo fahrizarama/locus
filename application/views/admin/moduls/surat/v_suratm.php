@@ -42,13 +42,13 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Perihal Surat</label>
-                                    <textarea class="form-control" name="perihal_surat" id="input_deskripsi" placeholder="Deskripsi Event"></textarea>
+                                    <label>Tembusan Surat</label>
+                                    <input type="text" class="form-control" name="tembusan_surat" placeholder="Tembusan Surat" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Tembusan Surat</label>
-                                    <input type="text" class="form-control" name="tembusan_surat" placeholder="Tembusan Surat" required>
+                                    <label>Perihal Surat</label>
+                                    <input type="text" class="form-control" name="perihal_surat" placeholder="Perihal Surat">
                                 </div>
 
                                 <div class="col-md-12">
@@ -90,8 +90,8 @@
             </thead>
             <tbody>
                 <?php $no = 1;
-                foreach ($sm as $sm) : 
-                $tanggal = $sm->tanggal_surat; ?>
+                foreach ($sm as $sm) :
+                    $tanggal = $sm->tanggal_surat; ?>
                     <tr>
                         <th><?= $no++ ?></th>
                         <th><?= $sm->no_surat ?></th>

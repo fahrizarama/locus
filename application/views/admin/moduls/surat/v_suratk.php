@@ -38,17 +38,17 @@
 
                                 <div class="col-md-12">
                                     <label>Perihal Surat</label>
-                                    <textarea class="form-control" name="perihal_surat" id="input_deskripsi" placeholder="Deskripsi Event"></textarea>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <label>Tembusan Surat</label>
-                                    <input type="text" class="form-control" name="tembusan_surat" placeholder="Tembusan Surat" required>
+                                    <input type="text" class="form-control" name="perihal_surat" placeholder="Perihal Surat"></input>
                                 </div>
 
                                 <div class="col-md-12">
                                     <label>Penulis Surat</label>
                                     <input type="text" class="form-control" name="penulis_surat" placeholder="Penulis Surat" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label>Tembusan Surat</label>
+                                    <input type="text" class="form-control" name="tembusan_surat" placeholder="Tembusan Surat" required>
                                 </div>
 
                                 <div class="col-md-12">
