@@ -138,7 +138,7 @@
 
                             <div class="col-md-12">
                                 <label>Perihal Surat</label>
-                                <textarea class="form-control" name="perihal_surat" id="input_deskripsi" placeholder="Deskripsi Event"><?= $e->perihal_surat ?></textarea>
+                                <input type="text" class="form-control" name="perihal_surat" value="<?= $e->perihal_surat ?>" placeholder="Deskripsi Event">
                             </div>
 
                             <div class="col-md-12">
