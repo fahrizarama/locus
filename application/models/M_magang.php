@@ -177,7 +177,6 @@ class M_magang extends CI_Model
         $this->db->join('tb_fakultas', 'tb_fakultas.id_fakultas = tb_mahasiswa.id_fakultas', 'left outer');
         $this->db->join('tb_jurusan', 'tb_jurusan.id_jurusan = tb_mahasiswa.id_jurusan', 'left outer');
         $this->db->join('tb_prodi', 'tb_prodi.id_prodi = tb_mahasiswa.id_prodi', 'left_outer');
-        $this->db->where('status', 1);
         return $this->db->get()->result();
     }
 
@@ -297,6 +296,7 @@ class M_magang extends CI_Model
         $this->tgl_mulai = $post['tgl_mulai'];
         $this->tgl_selesai = $post['tgl_selesai'];
         $this->nilai = $post['nilai'];
+        $this->status_tugas = $post['status_tugas'];
         
         $this->db->insert($this->tb_tugas_magang, $this);
     }
@@ -317,6 +317,7 @@ class M_magang extends CI_Model
         $this->tgl_mulai = $post['tgl_mulai'];
         $this->tgl_selesai = $post['tgl_selesai'];
         $this->nilai = $post['nilai'];
+        $this->status_tugas = $post['status_tugas'];
         
         $this->db->update($this->tb_tugas_magang, $this, array('id_tugas' => $post['id_tugas']));
     }
@@ -328,7 +329,7 @@ class M_magang extends CI_Model
 
     public function tugas_selesai($status, $id)
     {
-        $this->db->query("UPDATE `tb_mahasiswa` SET `status`= '$status' WHERE tb_mahasiswa.id_mahasiswa='$id'");
+        $this->db->query("UPDATE `tb_tugas_magang` SET `status_tugas`= '$status' WHERE tb_tugas_magang.id_tugas='$id'");
     }
 
 }

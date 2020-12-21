@@ -65,6 +65,7 @@
                                 <div class="col-md-12">
                                     <label>Nilai</label>
                                     <input type="number" class="form-control" name="nilai" placeholder="Nilai" required>
+                                    <input type="hidden" value="aktif" name="status_tugas">
                                 </div>
 
                             </div>
@@ -88,13 +89,14 @@
                     <th>Tanggal Mulai</th>
                     <th>Tanggal Selesai</th>
                     <th>Nilai</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1;
                 foreach ($tugasmagang as $tm) : $tanggal1 = $tm->tgl_mulai;
-                $tanggal2 = $tm->tgl_selesai; ?>
+                    $tanggal2 = $tm->tgl_selesai; ?>
                     <tr>
                         <th><?= $no++ ?></th>
                         <th><?= $tm->nama ?></th>
@@ -104,12 +106,13 @@
                         <th><?= date("d-m-yy", strtotime($tanggal1)) ?></th>
                         <th><?= date("d-m-yy", strtotime($tanggal2)) ?></th>
                         <th><?= $tm->nilai ?></th>
+                        <th><?= $tm->status_tugas ?></th>
                         <th>
                             <a href="" data-toggle="modal" data-target="#updatetugas<?= $tm->id_tugas ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
                             |
                             <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_magang/delete_tugasmagang/' . $tm->id_tugas) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
                             |
-                            <a href="" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                            <a href="<?= base_url('C_magang/tugas_selesai/' . $tm->id_tugas) ?>" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                         </th>
                     </tr>
                 <?php endforeach; ?>
@@ -179,6 +182,7 @@
                             <div class="col-md-12">
                                 <label>Nilai</label>
                                 <input type="number" class="form-control" name="nilai" value="<?= $etm->nilai ?>" placeholder="Nilai" required>
+                                <input type="hidden" name="status_tugas" value="<?= $etm->status ?>">
                             </div>
 
                         </div>

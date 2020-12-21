@@ -120,7 +120,7 @@
                                 <div class="col-md-12">
                                     <label>Tanggal Selesai</label>
                                     <input type="date" class="form-control" name="tanggal_selesai" placeholder="Tanggal Selesai" required>
-                                    <input type="hidden" value="1" name="status">
+                                    <input type="hidden" value="aktif" name="status">
                                 </div>
 
                             </div>
@@ -177,7 +177,7 @@
     </table>
 </div>
 <?php foreach ($dtlmhs as $m) : $tanggal = $m->tanggal_mulai;
-    $tanggal2 = $m->tanggal_selesai; ?> ?>
+    $tanggal2 = $m->tanggal_selesai; ?>
     <div id="detailmahasiswa<?= $m->id_mahasiswa ?>" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -199,6 +199,7 @@
                                     <th>Keahlian Awal</th>
                                     <th>Tanggal Mulai</th>
                                     <th>Tanggal Selesai</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -211,6 +212,7 @@
                                     <th><?= $m->keahlian_awal ?></th>
                                     <th><?= date("d-m-yy", strtotime($tanggal)) ?></th>
                                     <th><?= date("d-m-yy", strtotime($tanggal2)) ?></th>
+                                    <th><?= $m->status ?></th>
                                 </tr>
                             </tbody>
                         </table>

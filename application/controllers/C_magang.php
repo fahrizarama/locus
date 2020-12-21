@@ -253,7 +253,7 @@ class C_magang extends CI_Controller
 
     public function mahasiswa_selesai($id)
     {
-        $status = '2';
+        $status = 'Selesai';
         $this->M_magang->mahasiswa_selesai($status, $id);
         echo "<script>
         alert('Mahasiswa telah selesai melaksanakan magang');
@@ -299,4 +299,13 @@ class C_magang extends CI_Controller
         redirect(site_url('C_magang/tugas_magang'));
     }
 
+    public function tugas_selesai($id)
+    {
+        $status = 'Selesai';
+        $this->M_magang->tugas_selesai($status, $id);
+        echo "<script>
+        alert('Tugas telah selesai dikerjakan');
+        window.location.href = '" . base_url('C_magang/tugas_magang') . "';
+    </script>";
+    }
 }
