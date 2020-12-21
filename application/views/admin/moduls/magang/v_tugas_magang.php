@@ -1,4 +1,4 @@
-<?php $title = "<i class='fa fa-university'></i>&nbsp;Kampus"; ?>
+<?php $title = "<i class='fa fa-tasks'></i>&nbsp;Tugas Magang"; ?>
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
 <div class="page-header">
     <h1><?php echo $title; ?></h1>
@@ -7,56 +7,64 @@
 <div class="row">
     <div class="col-md-12">
         <div style="padding-bottom: 10px;">
-            <a href="#tambahkampus" role="button" class="btn btn-primary" data-toggle="modal">Tambah Kampus</a>
+            <a href="#tambahtgsmagang" role="button" class="btn btn-primary" data-toggle="modal">Tambah Tugas Magang</a>
         </div>
-        <div id="tambahkampus" class="modal fade" tabindex="-1">
+        <div id="tambahtgsmagang" class="modal fade" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form class="form-horizontal" role="form" action="<?= base_url('C_magang/save_kampus') ?>" method="POST" enctype="multipart/form-data">
+                    <form class="form-horizontal" role="form" action="<?= base_url('C_magang/save_tugasmagang') ?>" method="POST" enctype="multipart/form-data">
                         <input type="reset" class="hidden">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h3 class="smaller lighter blue no-margin">Tambah Kampus</h3>
+                            <h3 class="smaller lighter blue no-margin">Tambah Tugas Magang</h3>
                         </div>
                         <div class="modal-body">
                             <div class="row">
 
                                 <div class="col-md-12">
-                                    <label>Nama Kampus</label>
-                                    <input type="text" class="form-control" name="nama_kampus"  placeholder="Nama Kampus" required>
+                                    <label>Mahasiswa</label>
+                                    <select name="id_mahasiswa" class="form-control" required>
+                                        <option value="">--Pilih Mahasiswa--</option>
+                                        <?php foreach ($mahasiswa as $mhs) : ?>
+                                            <option value="<?= $mhs->id_mahasiswa ?>"><?= $mhs->nama ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Alamat</label>
-                                    <input type="text" class="form-control" name="alamat" placeholder="Alamat" required>
+                                    <label>Keahlian</label>
+                                    <select name="id_keahlian" class="form-control" required>
+                                        <option value="">--Pilih Keahlian--</option>
+                                        <?php foreach ($keahlian as $khl) : ?>
+                                            <option value="<?= $khl->id_keahlian ?>"><?= $khl->nama_keahlian ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Telepon</label>
-                                    <input type="text" class="form-control" name="telp" placeholder="Telepon" required>
+                                    <label>Judul Tugas</label>
+                                    <input type="text" class="form-control" name="judul_tugas" placeholder="Judul Tugas" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Email</label>
-                                    <input type="text" class="form-control" name="email_kampus" placeholder="Email" required>
+                                    <label>Deskripsi Tugas</label>
+                                    <textarea name="deskripsi_tugas" placeholder="Deskripsi Tugas" class="form-control" required></textarea>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Website</label>
-                                    <input type="text" class="form-control" name="website" placeholder="Website" required>
+                                    <label>Tanggal Mulai</label>
+                                    <input type="date" class="form-control" name="tgl_mulai" placeholder="Tanggal Mulai" required>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Kota/Kabupaten</label>
-                                    <div class="custom-file">
-                                        <input type="text" name="kota_kabupaten" class="form-control">
-                                        <!-- <label class="custom-file-label">Pilih Gambar...</label> -->
-                                    </div>
+                                    <label>Tanggal Selesai</label>
+                                    <input type="date" name="tgl_selesai" class="form-control">
+                                    <!-- <label class="custom-file-label">Pilih Gambar...</label> -->
                                 </div>
 
                                 <div class="col-md-12">
-                                    <label>Provinsi</label>
-                                    <input type="text" class="form-control" name="provinsi" placeholder="Provinsi" required>
+                                    <label>Nilai</label>
+                                    <input type="number" class="form-control" name="nilai" placeholder="Nilai" required>
                                 </div>
 
                             </div>
@@ -69,36 +77,39 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped table-bordered table-hover" id="kampus">
+        <table class="table table-striped table-bordered table-hover" id="tugasmagang">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Nama Kampus</th>
-                    <th>Alamat</th>
-                    <th>Telepon</th>
-                    <th>Email</th>
-                    <th>Website</th>
-                    <th>Kota/Kabupaten</th>
-                    <th>Provinsi</th>
+                    <th>Mahasiswa</th>
+                    <th>Keahlian</th>
+                    <th>Judul Tugas</th>
+                    <th>Deskripsi Tugas</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Nilai</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1;
-                foreach ($kampus as $k) : ?>
+                foreach ($tugasmagang as $tm) : $tanggal1 = $tm->tgl_mulai;
+                $tanggal2 = $tm->tgl_selesai; ?>
                     <tr>
                         <th><?= $no++ ?></th>
-                        <th><?= $k->nama_kampus ?></th>
-                        <th><?= $k->alamat ?></th>
-                        <th><?= $k->telp ?></th>
-                        <th><?= $k->email_kampus ?></th>
-                        <th><?= $k->website ?></th>
-                        <th><?= $k->kota_kabupaten ?></th>
-                        <th><?= $k->provinsi ?></th>
+                        <th><?= $tm->nama ?></th>
+                        <th><?= $tm->nama_keahlian ?></th>
+                        <th><?= $tm->judul_tugas ?></th>
+                        <th><?= $tm->deskripsi_tugas ?></th>
+                        <th><?= date("d-m-yy", strtotime($tanggal1)) ?></th>
+                        <th><?= date("d-m-yy", strtotime($tanggal2)) ?></th>
+                        <th><?= $tm->nilai ?></th>
                         <th>
-                            <a href="" data-toggle="modal" data-target="#modalupdate<?= $k->id_kampus ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                            <a href="" data-toggle="modal" data-target="#updatetugas<?= $tm->id_tugas ?>" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
                             |
-                            <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_magang/delete_kampus/' . $k->id_kampus) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                            <a onclick="return confirm('Apakah kamu yakin akan menghapus data?');" href="<?php echo site_url('C_magang/delete_tugasmagang/' . $tm->id_tugas) ?>" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+                            |
+                            <a href="" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                         </th>
                     </tr>
                 <?php endforeach; ?>
@@ -106,56 +117,68 @@
         </table>
     </div>
 </div>
-<?php foreach ($update as $e) : ?>
-    <div id="modalupdate<?= $e->id_kampus ?>" class="modal fade" tabindex="-1">
+<?php foreach ($etm as $etm) : ?>
+    <div id="updatetugas<?= $etm->id_tugas ?>" class="modal fade" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_kampus') ?>" method="POST" enctype="multipart/form-data">
+                <form class="form-horizontal" role="form" action="<?= base_url('C_magang/update_tugasmagang') ?>" method="POST" enctype="multipart/form-data">
                     <input type="reset" class="hidden">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h3 class="smaller lighter blue no-margin">Tambah Kampus</h3>
+                        <h3 class="smaller lighter blue no-margin">Update Tugas Magang</h3>
                     </div>
                     <div class="modal-body">
                         <div class="row">
 
                             <div class="col-md-12">
-                                <label>Nama Kampus</label>
-                                <input type="hidden" value="<?= $e->id_kampus ?>" name="id_kampus">
-                                <input type="text" class="form-control" name="nama_kampus" value="<?= $e->nama_kampus ?>" placeholder="Nama Kampus" required>
+                                <label>Mahasiswa</label>
+                                <input type="hidden" value="<?= $etm->id_tugas ?>" name="id_tugas">
+                                <select name="id_mahasiswa" class="form-control" required>
+                                    <option value="">--Pilih Mahasiswa--</option>
+                                    <?php foreach ($vmhs as $mhs) : ?>
+                                        <option <?php if ($mhs->id_mahasiswa == $etm->id_mahasiswa) {
+                                                    echo 'selected="selected"';
+                                                } ?> value="<?= $mhs->id_mahasiswa ?>"><?= $mhs->nama ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
 
                             <div class="col-md-12">
-                                <label>Alamat</label>
-                                <input type="text" class="form-control" name="alamat" value="<?= $e->alamat ?>" placeholder="Alamat" required>
+                                <label>Keahlian</label>
+                                <select name="id_keahlian" class="form-control" required>
+                                    <option value="">--Pilih Keahlian--</option>
+                                    <?php foreach ($vkhl as $khl) : ?>
+                                        <option <?php if ($khl->id_keahlian == $etm->id_keahlian) {
+                                                    echo 'selected="selected"';
+                                                } ?> value="<?= $khl->id_keahlian ?>"><?= $khl->nama_keahlian ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
 
                             <div class="col-md-12">
-                                <label>Telepon</label>
-                                <input type="text" class="form-control" name="telp" value="<?= $e->telp ?>" placeholder="Telepon" required>
+                                <label>Judul Tugas</label>
+                                <input type="text" class="form-control" value="<?= $etm->judul_tugas ?>" name="judul_tugas" placeholder="Judul Tugas" required>
                             </div>
 
                             <div class="col-md-12">
-                                <label>Email</label>
-                                <input type="text" class="form-control" name="email_kampus" value="<?= $e->email_kampus ?>" placeholder="Email" required>
+                                <label>Deskripsi Tugas</label>
+                                <textarea name="deskripsi_tugas" placeholder="Deskripsi Tugas" class="form-control" required><?= $etm->deskripsi_tugas ?></textarea>
                             </div>
 
                             <div class="col-md-12">
-                                <label>Website</label>
-                                <input type="text" class="form-control" name="website" value="<?= $e->website ?>" placeholder="Website" required>
+                                <label>Tanggal Mulai</label>
+                                <input type="date" class="form-control" value="<?= $etm->tgl_mulai ?>" name="tgl_mulai" placeholder="Tanggal Mulai" required>
                             </div>
 
                             <div class="col-md-12">
-                                <label>Kota/Kabupaten</label>
-                                <div class="custom-file">
-                                    <input type="text" name="kota_kabupaten" value="<?= $e->kota_kabupaten ?>" placeholder="Kabupaten/Kota" class="form-control">
-                                    <!-- <label class="custom-file-label">Pilih Gambar...</label> -->
-                                </div>
+                                <label>Tanggal Selesai</label>
+                                <input type="date" name="tgl_selesai" value="<?= $etm->tgl_selesai ?>" class="form-control">
+                                <!-- <label class="custom-file-label">Pilih Gambar...</label> -->
                             </div>
 
                             <div class="col-md-12">
-                                <label>Provinsi</label>
-                                <input type="text" class="form-control" name="provinsi" value="<?= $e->provinsi ?>" placeholder="Provinsi" required>
+                                <label>Nilai</label>
+                                <input type="number" class="form-control" name="nilai" value="<?= $etm->nilai ?>" placeholder="Nilai" required>
                             </div>
 
                         </div>
@@ -301,7 +324,7 @@
     }
 
     $(document).ready(function() {
-        $('#kampus').DataTable();
+        $('#tugasmagang').DataTable();
     });
 </script>
 <script>
