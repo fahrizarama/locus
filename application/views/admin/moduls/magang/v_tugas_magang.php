@@ -65,7 +65,7 @@
                                 <div class="col-md-12">
                                     <label>Nilai</label>
                                     <input type="number" class="form-control" name="nilai" placeholder="Nilai" required>
-                                    <input type="hidden" value="aktif" name="status_tugas">
+                                    <input type="hidden" value="Proses" name="status_tugas">
                                 </div>
 
                             </div>
